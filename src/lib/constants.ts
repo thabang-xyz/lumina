@@ -20,3 +20,12 @@ export const IMAGE_URL = '/woman-on-laptop-in-bed.jpg';
 export const INSTAGRAM_URL = 'https://www.instagram.com/luminacreatez/';
 export const APP_NAME = 'Lumina Createz';
 export const APP_FOOTER = 'All Rights Reserved.';
+
+export const SOCIAL_MEDIA_URLS = {
+    instagram: "https://www.instagram.com/luminacreatez?igsh=MnJqb29ibnM5bzY4",
+    youtube: "https://www.youtube.com/@luminacreatez",
+    tiktok: "https://www.tiktok.com/@luminacreatez",
+    pinterest: "https://www.pinterest.com/luminacreatez",
+    etsy: "https://www.etsy.com/shop/LuminaCreatez",
+    whatsapp: "https://wa.me/27635977308",
+  };
