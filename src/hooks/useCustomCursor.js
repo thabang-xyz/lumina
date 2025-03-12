@@ -44,8 +44,8 @@ const useCustomCursor = () => {
         }
       } else {
         // Default circle cursor
-        cursorRef.current.style.width = '20px';
-        cursorRef.current.style.height = '20px';
+        cursorRef.current.style.width = '40px';
+        cursorRef.current.style.height = '40px';
         cursorRef.current.style.borderRadius = '50%';
         cursorRef.current.style.transform = `translate(${mousePosition.x - 10}px, ${mousePosition.y - 10}px)`;
       }

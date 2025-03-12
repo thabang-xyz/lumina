@@ -57,11 +57,11 @@ const HeroSection = () => {
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <Image
-                  src="/logo-01.png"
+                  src="/logo-01-removebg.png"
                   alt={`${APP_NAME} logo`}
                   width={140}
                   height={40}
-                  className="cursor-pointer rounded-sm border border-stone-400"
+                  className="cursor-pointer rounded-sm"
                 />
               </motion.div>
 
