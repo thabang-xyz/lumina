@@ -66,7 +66,7 @@ const HeroSection = () => {
               </motion.div>
 
               <motion.h1
-                className="font-marjorie text-4xl lg:text-6xl font-black leading-tight"
+                className="font-marjorie text-4xl lg:text-6xl font-black leading-tight text-center lg:text-start"
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -83,11 +83,11 @@ const HeroSection = () => {
                 {FEATURES.map((feature, index) => (
                   <motion.div
                     key={index}
-                    className="flex flex-col items-start space-y-2"
+                    className="flex flex-col items-center lg:items-start space-y-2"
                     variants={gridItemVariants}
                   >
                     <BadgeCheck className="w-8 h-8 text-yellow-900" />
-                    <p className="font-normal text-sm text-black">
+                    <p className="font-normal text-sm text-black text-center lg:text-start">
                       {feature.name}
                     </p>
                   </motion.div>
@@ -98,7 +98,8 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-              >
+                className="flex justify-center lg:justify-start"
+                >
                 <Link
                   onClick={handleSubscribeClick}
                   href={LINK_URL}
