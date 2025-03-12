@@ -86,7 +86,7 @@ const HeroSection = () => {
                 <Link
                   onClick={handleSubscribeClick}
                   href={LINK_URL}
-                  className="inline-flex items-center text-yellow-900 text-md font-medium underline underline-offset-8 hover:no-underline transition-all duration-300 ease-in-out hover:text-yellow-700 focus:outline-none"
+                  className="hover:p-3.5 p-3.5 inline-flex items-center text-yellow-900 text-md font-medium underline underline-offset-8 hover:no-underline transition-all duration-300 ease-in-out hover:text-yellow-700 focus:outline-none"
                 >
                   {isLoading ? (
                     <Loader2 className="w-5 h-5 animate-spin text-yellow-900" />
