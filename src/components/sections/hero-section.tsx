@@ -12,6 +12,7 @@ import {
   IMAGE_URL,
   LANDING_HEADER,
   LINK_URL,
+  APP_NAME,
 } from "../../lib/constants";
 
 const HeroSection = () => {
@@ -44,11 +45,26 @@ const HeroSection = () => {
             </motion.div>
 
             <motion.div
-              className="w-full lg:w-1/2 flex flex-col justify-center space-y-8 px-4 py-6"
+              className="w-full lg:w-1/2 flex flex-col justify-center space-y-6 px-4 py-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
+              <motion.div
+                className="mb-4" 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <Image
+                  src="/logo-01.png"
+                  alt={`${APP_NAME} logo`}
+                  width={140}
+                  height={40}
+                  className="cursor-pointer rounded-sm border border-stone-400"
+                />
+              </motion.div>
+
               <motion.h1
                 className="font-marjorie text-4xl lg:text-6xl font-black leading-tight"
                 initial={{ opacity: 0, y: -50 }}
@@ -86,7 +102,7 @@ const HeroSection = () => {
                 <Link
                   onClick={handleSubscribeClick}
                   href={LINK_URL}
-                  className="hover:p-3.5 p-3.5 inline-flex items-center text-yellow-900 text-md font-medium underline underline-offset-8 hover:no-underline transition-all duration-300 ease-in-out hover:text-yellow-700 focus:outline-none"
+                  className="hover:p-3.5 p-3.5 hover:text-yellow-950 inline-flex items-center text-yellow-900 text-sm font-medium underline underline-offset-8 hover:no-underline transition-all duration-300 ease-in-out focus:outline-none"
                 >
                   {isLoading ? (
                     <Loader2 className="w-5 h-5 animate-spin text-yellow-900" />
