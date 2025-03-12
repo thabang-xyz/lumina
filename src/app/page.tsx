@@ -8,7 +8,7 @@ export default function HomePage() {
   const { cursorElement } = useCustomCursor();
 
   return (
-    <div >
+    <div>
       {cursorElement}
       <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-4 md:p-6">
         <div className="w-full">

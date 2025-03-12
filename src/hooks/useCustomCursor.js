@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from "react";
+import useDeviceType from "./useDeviceType"; // Import the new hook
 
 const useCustomCursor = () => {
+  const hasMouse = useDeviceType(); // Check if the device has a mouse
   const cursorRef = useRef(null);
   const trailRefs = useRef([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -18,40 +20,32 @@ const useCustomCursor = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    if (hasMouse) {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [hasMouse]);
 
   // Update cursor and trail positions
   useEffect(() => {
-    if (cursorRef.current) {
+    if (hasMouse && cursorRef.current) {
       if (isLinkHovered) {
-        // If the link is small enough, keep it as a circle
-        if (linkRect.width <= 40 && linkRect.height <= 40) {
-          cursorRef.current.style.width = '40px';
-          cursorRef.current.style.height = '40px';
-          cursorRef.current.style.borderRadius = '50%';
-          cursorRef.current.style.transform = `translate(${mousePosition.x - 20}px, ${mousePosition.y - 20}px)`;
-        } else {
-          // If the link is large, transform into a rectangle
-          cursorRef.current.style.width = `${linkRect.width}px`;
-          cursorRef.current.style.height = `${linkRect.height}px`;
-          cursorRef.current.style.borderRadius = '4px'; // Slightly rounded corners
-          cursorRef.current.style.transform = `translate(${linkRect.x}px, ${linkRect.y}px)`;
-        }
+        cursorRef.current.style.width = `${linkRect.width}px`;
+        cursorRef.current.style.height = `${linkRect.height}px`;
+        cursorRef.current.style.borderRadius = "0";
+        cursorRef.current.style.transform = `translate(${linkRect.x}px, ${linkRect.y}px)`;
       } else {
-        // Default circle cursor
-        cursorRef.current.style.width = '40px';
-        cursorRef.current.style.height = '40px';
-        cursorRef.current.style.borderRadius = '50%';
+        cursorRef.current.style.width = "40px";
+        cursorRef.current.style.height = "40px";
+        cursorRef.current.style.borderRadius = "50%";
         cursorRef.current.style.transform = `translate(${mousePosition.x - 10}px, ${mousePosition.y - 10}px)`;
       }
     }
 
-    if (trailRefs.current.length === trailLength) {
+    if (hasMouse && trailRefs.current.length === trailLength) {
       trailRefs.current.forEach((trailRef, index) => {
         if (trailRef.current) {
           const trailX = mousePosition.x - (trailLength - index) * trailSpacing - 10;
@@ -60,13 +54,13 @@ const useCustomCursor = () => {
         }
       });
     }
-  }, [mousePosition, isLinkHovered, linkRect]);
+  }, [mousePosition, isLinkHovered, linkRect, hasMouse]);
 
   // Handle link hover and leave events
   useEffect(() => {
     const handleLinkHover = (e) => {
       const target = e.target;
-      if (target.tagName === 'A' || target.tagName === 'LINK') {
+      if (target.tagName === "A" || target.tagName === "LINK") {
         const rect = target.getBoundingClientRect();
         setLinkRect({
           width: rect.width + 10,
@@ -82,29 +76,31 @@ const useCustomCursor = () => {
       setIsLinkHovered(false);
     };
 
-    document.addEventListener('mouseover', handleLinkHover);
-    document.addEventListener('mouseout', handleLinkLeave);
+    if (hasMouse) {
+      document.addEventListener("mouseover", handleLinkHover);
+      document.addEventListener("mouseout", handleLinkLeave);
+    }
 
     return () => {
-      document.removeEventListener('mouseover', handleLinkHover);
-      document.removeEventListener('mouseout', handleLinkLeave);
+      document.removeEventListener("mouseover", handleLinkHover);
+      document.removeEventListener("mouseout", handleLinkLeave);
     };
-  }, []);
+  }, [hasMouse]);
 
-  // Custom cursor and trail elements
-  const cursorElement = (
+  // Return cursorElement only if the device has a mouse
+  const cursorElement = hasMouse ? (
     <>
       <div
         ref={cursorRef}
         style={{
-          position: 'fixed',
-          width: '20px',
-          height: '20px',
-          borderRadius: '50%',
-          border: '1px solid black',
-          pointerEvents: 'none',
+          position: "fixed",
+          width: "20px",
+          height: "20px",
+          borderRadius: "50%",
+          border: "1px solid black",
+          pointerEvents: "none",
           zIndex: 9999,
-          transition: 'transform 0.2s ease-out, width 0.3s ease-out, height 0.3s ease-out, border-radius 0.3s ease-out',
+          transition: "transform 0.2s ease-out, width 0.3s ease-out, height 0.3s ease-out, border-radius 0.3s ease-out",
         }}
       />
       {trailRefs.current.map((trailRef, index) => (
@@ -112,19 +108,19 @@ const useCustomCursor = () => {
           key={index}
           ref={trailRef}
           style={{
-            position: 'fixed',
-            width: '10px',
-            height: '10px',
-            borderRadius: '50%',
-            backgroundColor: 'gray',
-            pointerEvents: 'none',
+            position: "fixed",
+            width: "10px",
+            height: "10px",
+            borderRadius: "50%",
+            backgroundColor: "gray",
+            pointerEvents: "none",
             zIndex: 9998 - index,
-            transition: 'transform 0.2s ease-out',
+            transition: "transform 0.2s ease-out",
           }}
         />
       ))}
     </>
-  );
+  ) : null;
 
   return { cursorElement };
 };

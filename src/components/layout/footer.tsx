@@ -24,7 +24,7 @@ const Footer = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.2, 
+        staggerChildren: 0.2,
       },
     },
   };
@@ -32,13 +32,13 @@ const Footer = () => {
   const iconVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
-        y: 0,
+      y: 0,
       opacity: 1,
       transition: {
         type: "spring",
         stiffness: 300,
         damping: 15,
-        duration: 0.5
+        duration: 0.5,
       },
     },
     hover: {
@@ -74,13 +74,13 @@ const Footer = () => {
       animate="visible"
       className="max-w-5xl mx-auto py-2"
     >
-      <div className="flex justify-between items-center">
-        <p className="text-xs text-gray-400">
+      <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+        <p className="text-xs text-gray-400 sm:mb-0">
           © {new Date().getFullYear()} {APP_NAME}. {APP_FOOTER}
         </p>
 
         <motion.div
-          className="flex items-center space-x-4"
+          className="flex flex-wrap justify-center gap-4 sm:gap-0 sm:space-x-4"
           variants={socialContainerVariants}
           initial="hidden"
           animate={socialControls}
@@ -92,7 +92,6 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{ height: 25, width: 25 }}
-
             />
           </motion.div>
 
@@ -103,7 +102,6 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{ height: 25, width: 25 }}
-
             />
           </motion.div>
 
@@ -114,7 +112,6 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{ height: 25, width: 25 }}
-
             />
           </motion.div>
 
@@ -125,7 +122,6 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{ height: 25, width: 25 }}
-
             />
           </motion.div>
 
@@ -135,7 +131,6 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{ height: 25, width: 25 }}
-
             />
           </motion.div>
 
@@ -146,7 +141,6 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               style={{ height: 25, width: 25 }}
-
             />
           </motion.div>
         </motion.div>
